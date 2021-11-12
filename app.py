@@ -3,6 +3,8 @@ import scanpy as sc
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+from matplotlib.colors import ListedColormap
+
 
 @st.cache(allow_output_mutation=True, show_spinner=False)
 def load_data():
