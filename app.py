@@ -56,11 +56,16 @@ def get_fig():
 
 @st.cache(allow_output_mutation=True, show_spinner=False)
 def get_fig2():
-	sc.pl.umap(adata, color=["genotype_new"],
-		use_raw=False,wspace=.4, hspace=0.2,
-			frameon=False,add_outline=False,
-		title=["genotype"],
-			color_map='viridis',return_fig=True)
+	color_map = {0: 'r', 1:'b'}
+	classes = ['0','1']
+	colours = ListedColormap(['r','b'])
+	fig,ax = plt.subplots(figsize=(15,6))
+	result = plt.scatter(coord[:, 0], coord[:, 1], c = adata.obs['genotype_new'], cmap = colours, s = 3,alpha=0.65)
+	plt.legend(handles=result.legend_elements()[0], 
+       labels=classes)
+	ax.axis('off')
+	ax.set_title('Genotype')
+	return fig
 
 if selectbox == 'UMAP':
 	st.pyplot(get_fig())
